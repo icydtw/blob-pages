@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Blob</title>
+    <style>
+        :root {
+            --bg: #F2F2F2;
+            --card-bg: #FFFFFF;
+            --text-primary: #151515;
+            --text-secondary: #6A6A6A;
+            --text-tertiary: #999999;
+            --accent: #20C100;
+            --accent-soft: #68BE12;
+            --divider: #E7E7E7;
+            --border: #D2D2D2;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1A1A1A;
+                --card-bg: #353535;
+                --text-primary: #F0F0F0;
+                --text-secondary: #F0F0F0;
+                --text-tertiary: #858585;
+                --accent: #20C100;
+                --accent-soft: #68BE12;
+                --divider: #535353;
+                --border: #535353;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 48px 20px 64px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 8px;
+        }
+
+        .header .effective-date {
+            font-size: 14px;
+            color: var(--text-tertiary);
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .section p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 12px;
+        }
+
+        .section ul:last-child {
+            margin-bottom: 0;
+        }
+
+        .section ul li {
+            font-size: 15px;
+            color: var(--text-secondary);
+            padding: 6px 0 6px 20px;
+            position: relative;
+        }
+
+        .section ul li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+
+        .contact-link {
+            color: var(--accent-soft);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .contact-link:hover {
+            opacity: 0.8;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Privacy Policy</h1>
+            <span class="effective-date">Effective date: November 24, 2026</span>
+        </div>
+
+        <div class="section">
+            <h2>1. About This Policy</h2>
+            <p>This policy explains what data Blob ("the App") handles, where it goes and how you can have it deleted. The App has no advertising and no third-party analytics or tracking. We do not sell your personal data.</p>
+        </div>
+
+        <div class="section">
+            <h2>2. Your Journal</h2>
+            <p>Your entries — mood, text, photos, places and tagged people — are stored on your device. If iCloud is turned on, they are also kept in your private iCloud storage so that you can sync and restore them. That storage belongs to your Apple account; we cannot read it.</p>
+            <p>If you allow location access, the App uses it to suggest a place for an entry. If you allow photo access, the App reads only the photos you pick.</p>
+        </div>
+
+        <div class="section">
+            <h2>3. Daily AI Review</h2>
+            <p>The review is optional. It stays off until you turn it on in the App and agree to your entries being sent, and you can turn it off at any time. While it is on:</p>
+            <ul>
+                <li>The App sends your entries to our server: the text, mood, date and time, place name, the names of people you tagged and the number of photos. Photos themselves and map coordinates are not sent. It also sends your time zone, language, region, the time you chose for the morning notification and the notification token of your device.</li>
+                <li>Entry text is sent exactly as you wrote it. Anything personal you put in an entry — names, places, health, relationships — is part of what is sent. It is not anonymized.</li>
+                <li>To write the review, our server passes your entries to Anthropic, PBC, the provider of the Claude AI model, which processes them on our behalf. Short helper requests (for example, to mark the topic of an entry) are sent to the same provider.</li>
+                <li>Our server stores your entries, the reviews written for you, short notes the AI keeps about earlier reviews, and what you tap in a review: answers, marks, likes and dislikes, and any comment you add to a dislike.</li>
+                <li>The server identifies you by a random key created on your device and kept in your iCloud. It does not receive your name, email address or Apple ID.</li>
+            </ul>
+            <p>The review is not medical or psychological advice.</p>
+        </div>
+
+        <div class="section">
+            <h2>4. Subscription Check</h2>
+            <p>The review is part of the paid subscription. To confirm that your subscription is active, the App sends our server the signed purchase record issued by the App Store. It contains the purchase and product identifiers, the purchase and expiry dates and the App Store country. It does not contain your name, email address, Apple ID or payment details. Payments themselves are handled by Apple; we never see your card.</p>
+        </div>
+
+        <div class="section">
+            <h2>5. Friends</h2>
+            <p>Friends is optional and requires Sign in with Apple. If you use it, your account identifier, your name (if you let Apple share it), your nickname and avatar, your list of friends, the entries you choose to share together with their photos, and the notification token of your device are stored on our server so that the people you chose can see them. The App asks Apple for your name only, not for your email address.</p>
+        </div>
+
+        <div class="section">
+            <h2>6. Who Processes Your Data</h2>
+            <ul>
+                <li><strong>Apple</strong> — iCloud storage, App Store purchases, Sign in with Apple and delivery of notifications.</li>
+                <li><strong>Google Firebase (Google Cloud)</strong>, in the United States — our server and its database, and delivery of notifications.</li>
+                <li><strong>Anthropic, PBC</strong> — the Claude AI model that writes the review.</li>
+            </ul>
+            <p>These providers process data on our behalf and under their own terms. Your data may be processed in countries other than your own, including the United States.</p>
+        </div>
+
+        <div class="section">
+            <h2>7. How Long We Keep It</h2>
+            <ul>
+                <li>When you turn the review off in the App's Settings, your entries, reviews, notes and feedback are deleted from our server.</li>
+                <li>If your subscription ends, the server stops writing reviews. Your data is kept for 30 days in case you come back, and is then deleted.</li>
+                <li>When you delete your Friends account in the App, your profile, shared entries and list of friends are deleted.</li>
+                <li>Entries on your device and in your iCloud stay there until you delete them or the App.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>8. Your Choices</h2>
+            <p>You can use the App without the review and without Friends; then nothing from your journal leaves your device and your iCloud. You can turn either feature off at any time. To ask what we hold about you, to correct it or to have it deleted, write to the address in section 11.</p>
+        </div>
+
+        <div class="section">
+            <h2>9. Children</h2>
+            <p>The App is not intended for children under 13, and we do not knowingly collect their data.</p>
+        </div>
+
+        <div class="section">
+            <h2>10. Changes to This Policy</h2>
+            <p>If this policy changes, the new version will be posted on this page with a new effective date.</p>
+        </div>
+
+        <div class="section">
+            <h2>11. Contact</h2>
+            <p>If you have any questions about this policy, please contact us at <a class="contact-link" href="mailto:danilvilnicov@gmail.com">danilvilnicov@gmail.com</a>.</p>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 Blob. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
