@@ -15,6 +15,7 @@
             --accent-soft: #68BE12;
             --divider: #E7E7E7;
             --border: #D2D2D2;
+            --link: #397100;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -28,6 +29,7 @@
                 --accent-soft: #68BE12;
                 --divider: #535353;
                 --border: #535353;
+                --link: #68BE12;
             }
         }
 
@@ -122,7 +124,7 @@
         }
 
         .contact-link {
-            color: var(--accent-soft);
+            color: var(--link);
             text-decoration: none;
             transition: opacity 0.2s;
         }
@@ -137,14 +139,77 @@
             font-size: 13px;
             color: var(--text-tertiary);
         }
+
+
+        .lang-switch {
+            text-align: right;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .lang-switch a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .notice {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .page-links {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 32px;
+        }
+
+        .page-links a {
+            margin: 0 8px;
+        }
     </style>
+    <link rel="alternate" hreflang="ru" href="ru/terms-of-use.html">
+    <script>
+        // Читателю с русским языком устройства открывается русская страница.
+        // Выбор «English» в переключателе запоминается; ссылка на оригинал из перевода — только на один просмотр.
+        (function () {
+            var params = new URLSearchParams(location.search);
+            var saved = null;
+            try { saved = localStorage.getItem("blobLang"); } catch (error) {}
+            if (params.get("lang") === "en") {
+                if (params.get("remember") === "1") {
+                    try { localStorage.setItem("blobLang", "en"); } catch (error) {}
+                }
+                // Соседние английские страницы открываются тоже по-английски.
+                document.addEventListener("DOMContentLoaded", function () {
+                    document.querySelectorAll('a[href$=".html"]').forEach(function (link) {
+                        if (link.getAttribute("href").indexOf("/") === -1) { link.setAttribute("href", link.getAttribute("href") + "?lang=en"); }
+                    });
+                });
+                return;
+            }
+            var device = (navigator.language || "").toLowerCase().split("-")[0];
+            var wantsRussian = saved ? saved === "ru" : device === "ru";
+            if (!wantsRussian) { return; }
+            var target = new URL("ru/terms-of-use.html", location.href);
+            params.delete("lang");
+            params.delete("remember");
+            target.search = params.toString();
+            target.hash = location.hash;
+            location.replace(target.href);
+        })();
+    </script>
 </head>
 <body>
     <div class="container">
+        <div class="lang-switch"><a href="ru/terms-of-use.html" lang="ru" hreflang="ru" onclick="try { localStorage.setItem('blobLang', 'ru'); } catch (error) {}">Русский</a></div>
         <div class="header">
             <h1>Terms of Use</h1>
-            <span class="effective-date">Effective date: November 24, 2026</span>
+            <span class="effective-date">Effective date: November 26, 2026</span>
         </div>
+        <p class="notice">These terms are also available in <a class="contact-link" href="ru/terms-of-use.html">Russian</a>. If a translation differs from the English text, the English text prevails.</p>
 
         <div class="section">
             <h2>1. Acceptance of Terms</h2>
@@ -153,41 +218,41 @@
 
         <div class="section">
             <h2>2. Description of the App</h2>
-            <p>Blob is a mood journaling application that allows users to create mood entries, track emotional states, view statistics, and receive AI-powered insights based on their journal data.</p>
+            <p>Blob is a mood diary application that lets you create entries, track your mood, view statistics, and, with Premium, receive a daily AI review based on your entries.</p>
         </div>
 
         <div class="section">
             <h2>3. User Accounts</h2>
-            <p>Certain features of the App, such as the Friends functionality, require authentication via Sign in with Apple. By signing in, you agree to provide accurate information and are responsible for maintaining the security of your account.</p>
+            <p>Some features, including Friends, require you to sign in with Apple. By signing in, you agree to provide accurate information and are responsible for maintaining the security of your account.</p>
         </div>
 
         <div class="section">
             <h2>4. Subscription</h2>
-            <p>Blob offers optional subscription plans that unlock additional premium features. The full list of premium features is available within the App.</p>
-            <p>Subscriptions are billed through your Apple ID account on a recurring basis (monthly or yearly). You can manage or cancel your subscription at any time through your device's Settings. Cancellation takes effect at the end of the current billing period.</p>
+            <p>Blob offers optional monthly and annual Premium plans. The full list of Premium features is available in the App.</p>
+            <p>Subscriptions are billed through your Apple Account on a recurring basis (monthly or yearly). You can manage or cancel your subscription at any time in your device's Settings. Cancellation takes effect at the end of the current billing period.</p>
         </div>
 
         <div class="section">
             <h2>5. User Content</h2>
-            <p>You retain ownership of all content you create within the App, including mood entries, text notes, and photos. By using the App, you grant us a limited license to process your content solely for the purpose of providing App functionality, including AI-generated analytics.</p>
+            <p>You retain ownership of all content you create within the App, including entries, text, and photos. By using the App, you grant us a limited license to process your content solely for the purpose of providing App functionality, including the daily AI review if you turn it on and agree to send your entries.</p>
             <p>You are solely responsible for the content you create and share within the App.</p>
         </div>
 
         <div class="section">
-            <h2>6. Privacy & Data</h2>
-            <p><strong>Your journal.</strong> Your entries are stored on your device. If iCloud is turned on, they are also kept in your private iCloud storage, which we cannot read, so that you can sync and restore them. We do not sell your personal data.</p>
-            <p><strong>Daily AI review.</strong> The review is optional. It stays off until you turn it on in the App and agree to your entries being sent, and you can turn it off at any time. While it is on:</p>
+            <h2>6. Privacy &amp; Data</h2>
+            <p><strong>Your diary.</strong> Your entries are stored on your device. If iCloud is turned on, copies are also kept in your private iCloud storage so that you can sync and restore them; we cannot read that storage. We do not sell your personal data.</p>
+            <p><strong>Daily AI review.</strong> The review is included in Premium and is optional. It stays off until you turn it on in the App and agree to your entries being sent, and you can turn it off at any time. While it is on:</p>
             <ul>
-                <li>The App sends your entries to our server: the text, mood, date and time, place name, the names of people you tagged and the number of photos. Photos themselves and map coordinates are not sent. It also sends your time zone, language, region, the time you chose for the morning notification and the notification token of your device.</li>
+                <li>The App sends your entries to our server: the text, mood, date and time, place name, the names of people you tagged, and the number of photos. Photos themselves and map coordinates are not sent. It also sends your time zone, language, region, the time you chose for the morning notification, and the notification token of your device.</li>
                 <li>Entry text is sent exactly as you wrote it. Anything personal you put in an entry — names, places, health, relationships — is part of what is sent. It is not anonymized.</li>
-                <li>To write the review, our server passes your entries to Anthropic, PBC, the provider of the Claude AI model, which processes them on our behalf. Short helper requests (for example, to mark the topic of an entry) are sent to the same provider.</li>
-                <li>Our server runs on Google Firebase (Google Cloud) in the United States. It stores your entries, the reviews written for you, short notes the AI keeps about earlier reviews, and what you tap in a review: answers, marks, likes and dislikes, and any comment you add to a dislike.</li>
-                <li>The server identifies you by a random key created on your device and kept in your iCloud. It does not receive your name, email address or Apple ID.</li>
+                <li>To write the review, our server sends your entries to Anthropic, PBC. Anthropic processes them on our behalf using its Claude AI model. Short helper requests (for example, to mark the topic of an entry) go to Anthropic as well.</li>
+                <li>Our server runs on Google Firebase (Google Cloud) in the United States. It stores copies of your entries, the reviews written for you, short notes the AI keeps about earlier reviews, and your responses to each review: answers, marks, likes, dislikes, and any comment you leave with a dislike.</li>
+                <li>For the review, the server identifies you by a random key created on your device and kept in your iCloud, not by your name, email address, or Apple Account.</li>
             </ul>
-            <p>To confirm your subscription, the App also sends our server the signed purchase record issued by the App Store. It has no name, email address or payment details.</p>
-            <p>When you turn the review off in the App's Settings, your entries, reviews, notes and feedback are deleted from our server. If your subscription ends, they are kept for 30 days and then deleted.</p>
-            <p><strong>Friends.</strong> If you sign in with Apple to use Friends, your profile and the entries you share with friends are stored on Google Firebase so that the people you chose can see them.</p>
-            <p><strong>Requests.</strong> To ask what we hold about you or to have it deleted, write to the address in section 12.</p>
+            <p>To confirm your subscription, the App also sends our server the signed purchase record issued by the App Store. It has no name, email address, or payment details.</p>
+            <p>When you turn the review off in the App's settings, the data kept for the review is deleted from our server: the copies of your entries, your reviews, the AI's notes, and your feedback. If your subscription ends, this data is kept for 30 days and then deleted.</p>
+            <p><strong>Friends.</strong> If you sign in with Apple to use Friends, your profile and the entries you share are stored on Google Firebase. Other people signed in to Friends can find your profile by your nickname; an entry you share can be seen only by you and the friends you tagged in it.</p>
+            <p><strong>Requests.</strong> To find out what data we hold about you, or to ask us to correct or delete it, contact us at the address in section 12.</p>
             <p>The full details are in our <a class="contact-link" href="privacy-policy.html">Privacy Policy</a>.</p>
         </div>
 
@@ -209,7 +274,7 @@
 
         <div class="section">
             <h2>9. Disclaimer of Warranties</h2>
-            <p>The App is provided "as is" without warranties of any kind. Blob does not guarantee that the App will be error-free or uninterrupted. AI-generated insights are for informational purposes only and should not be considered professional medical or psychological advice.</p>
+            <p>The App is provided "as is" without warranties of any kind. Blob does not guarantee that the App will be error-free or uninterrupted. The AI review is for informational purposes only and should not be considered professional medical or psychological advice.</p>
         </div>
 
         <div class="section">
@@ -219,13 +284,14 @@
 
         <div class="section">
             <h2>11. Changes to Terms</h2>
-            <p>We reserve the right to modify these Terms of Use at any time. Changes will be effective upon posting the updated terms within the App. Continued use of the App after changes constitutes acceptance of the modified terms.</p>
+            <p>We reserve the right to modify these Terms of Use at any time. Changes will be effective upon posting the updated terms on this page. Continued use of the App after changes constitutes acceptance of the modified terms.</p>
         </div>
 
         <div class="section">
             <h2>12. Contact</h2>
             <p>If you have any questions about these Terms of Use, please contact us at <a class="contact-link" href="mailto:danilvilnicov@gmail.com">danilvilnicov@gmail.com</a>.</p>
         </div>
+        <div class="page-links"><a class="contact-link" href="about.html">About</a><a class="contact-link" href="privacy-policy.html">Privacy Policy</a></div>
 
         <div class="footer">
             &copy; 2026 Blob. All rights reserved.

@@ -15,6 +15,7 @@
             --accent-soft: #68BE12;
             --divider: #E7E7E7;
             --border: #D2D2D2;
+            --link: #397100;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -28,6 +29,7 @@
                 --accent-soft: #68BE12;
                 --divider: #535353;
                 --border: #535353;
+                --link: #68BE12;
             }
         }
 
@@ -122,7 +124,7 @@
         }
 
         .contact-link {
-            color: var(--accent-soft);
+            color: var(--link);
             text-decoration: none;
             transition: opacity 0.2s;
         }
@@ -137,55 +139,120 @@
             font-size: 13px;
             color: var(--text-tertiary);
         }
+
+
+        .lang-switch {
+            text-align: right;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .lang-switch a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .notice {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .page-links {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 32px;
+        }
+
+        .page-links a {
+            margin: 0 8px;
+        }
     </style>
+    <link rel="alternate" hreflang="ru" href="ru/privacy-policy.html">
+    <script>
+        // Читателю с русским языком устройства открывается русская страница.
+        // Выбор «English» в переключателе запоминается; ссылка на оригинал из перевода — только на один просмотр.
+        (function () {
+            var params = new URLSearchParams(location.search);
+            var saved = null;
+            try { saved = localStorage.getItem("blobLang"); } catch (error) {}
+            if (params.get("lang") === "en") {
+                if (params.get("remember") === "1") {
+                    try { localStorage.setItem("blobLang", "en"); } catch (error) {}
+                }
+                // Соседние английские страницы открываются тоже по-английски.
+                document.addEventListener("DOMContentLoaded", function () {
+                    document.querySelectorAll('a[href$=".html"]').forEach(function (link) {
+                        if (link.getAttribute("href").indexOf("/") === -1) { link.setAttribute("href", link.getAttribute("href") + "?lang=en"); }
+                    });
+                });
+                return;
+            }
+            var device = (navigator.language || "").toLowerCase().split("-")[0];
+            var wantsRussian = saved ? saved === "ru" : device === "ru";
+            if (!wantsRussian) { return; }
+            var target = new URL("ru/privacy-policy.html", location.href);
+            params.delete("lang");
+            params.delete("remember");
+            target.search = params.toString();
+            target.hash = location.hash;
+            location.replace(target.href);
+        })();
+    </script>
 </head>
 <body>
     <div class="container">
+        <div class="lang-switch"><a href="ru/privacy-policy.html" lang="ru" hreflang="ru" onclick="try { localStorage.setItem('blobLang', 'ru'); } catch (error) {}">Русский</a></div>
         <div class="header">
             <h1>Privacy Policy</h1>
-            <span class="effective-date">Effective date: November 24, 2026</span>
+            <span class="effective-date">Effective date: November 26, 2026</span>
         </div>
+        <p class="notice">This policy is also available in <a class="contact-link" href="ru/privacy-policy.html">Russian</a>. If a translation differs from the English text, the English text prevails.</p>
 
         <div class="section">
             <h2>1. About This Policy</h2>
-            <p>This policy explains what data Blob ("the App") handles, where it goes and how you can have it deleted. The App has no advertising and no third-party analytics or tracking. We do not sell your personal data.</p>
+            <p>This policy explains what data Blob ("the App") handles, where it goes, and how you can have it deleted. The App has no advertising. We use no third-party analytics or tracking services. We do not sell your personal data.</p>
         </div>
 
         <div class="section">
-            <h2>2. Your Journal</h2>
-            <p>Your entries — mood, text, photos, places and tagged people — are stored on your device. If iCloud is turned on, they are also kept in your private iCloud storage so that you can sync and restore them. That storage belongs to your Apple account; we cannot read it.</p>
-            <p>If you allow location access, the App uses it to suggest a place for an entry. If you allow photo access, the App reads only the photos you pick.</p>
+            <h2>2. Your Diary</h2>
+            <p>Your entries — mood, text, photos, places, and tagged people — are stored on your device. If iCloud is turned on, copies are also kept in your private iCloud storage so that you can sync and restore them. That storage belongs to your Apple Account; we cannot read it.</p>
+            <p>If you allow location access, the App shows where you are on the map when you add a place to an entry. If you allow photo access, the App reads only the photos you pick.</p>
         </div>
 
         <div class="section">
             <h2>3. Daily AI Review</h2>
-            <p>The review is optional. It stays off until you turn it on in the App and agree to your entries being sent, and you can turn it off at any time. While it is on:</p>
+            <p>The review is included in Premium and is optional. It stays off until you turn it on in the App and agree to your entries being sent, and you can turn it off at any time. While it is on:</p>
             <ul>
-                <li>The App sends your entries to our server: the text, mood, date and time, place name, the names of people you tagged and the number of photos. Photos themselves and map coordinates are not sent. It also sends your time zone, language, region, the time you chose for the morning notification and the notification token of your device.</li>
+                <li>The App sends your entries to our server: the text, mood, date and time, place name, the names of people you tagged, and the number of photos. Photos themselves and map coordinates are not sent. It also sends your time zone, language, region, the time you chose for the morning notification, and the notification token of your device.</li>
                 <li>Entry text is sent exactly as you wrote it. Anything personal you put in an entry — names, places, health, relationships — is part of what is sent. It is not anonymized.</li>
-                <li>To write the review, our server passes your entries to Anthropic, PBC, the provider of the Claude AI model, which processes them on our behalf. Short helper requests (for example, to mark the topic of an entry) are sent to the same provider.</li>
-                <li>Our server stores your entries, the reviews written for you, short notes the AI keeps about earlier reviews, and what you tap in a review: answers, marks, likes and dislikes, and any comment you add to a dislike.</li>
-                <li>The server identifies you by a random key created on your device and kept in your iCloud. It does not receive your name, email address or Apple ID.</li>
+                <li>To write the review, our server sends your entries to Anthropic, PBC. Anthropic processes them on our behalf using its Claude AI model. Short helper requests (for example, to mark the topic of an entry) go to Anthropic as well.</li>
+                <li>Our server stores copies of your entries, the reviews written for you, short notes the AI keeps about earlier reviews, and your responses to each review: answers, marks, likes, dislikes, and any comment you leave with a dislike.</li>
+                <li>For the review, the server identifies you by a random key created on your device and kept in your iCloud, not by your name, email address, or Apple Account.</li>
             </ul>
             <p>The review is not medical or psychological advice.</p>
         </div>
 
         <div class="section">
             <h2>4. Subscription Check</h2>
-            <p>The review is part of the paid subscription. To confirm that your subscription is active, the App sends our server the signed purchase record issued by the App Store. It contains the purchase and product identifiers, the purchase and expiry dates and the App Store country. It does not contain your name, email address, Apple ID or payment details. Payments themselves are handled by Apple; we never see your card.</p>
+            <p>The daily AI review is included in Premium. To confirm that your subscription is active, the App sends our server the signed purchase record issued by the App Store. It contains the purchase and product identifiers, the purchase date, the expiration date, and the App Store country. It does not contain your name, email address, Apple Account, or payment details. Payments themselves are handled by Apple; we never see your card.</p>
         </div>
 
         <div class="section">
             <h2>5. Friends</h2>
-            <p>Friends is optional and requires Sign in with Apple. If you use it, your account identifier, your name (if you let Apple share it), your nickname and avatar, your list of friends, the entries you choose to share together with their photos and their place on the map, and the notification token of your device are stored on our server so that the people you chose can see them. The App asks Apple for your name only, not for your email address.</p>
+            <p>Friends is optional and requires Sign in with Apple. If you use it, our server stores your account identifier, your name (if you let Apple share it), your nickname and avatar, your list of friends, the entries you choose to share together with their photos and their place on the map, and the notification token of your device.</p>
+            <p>Your name, nickname, and avatar can be seen by other people signed in to Friends: they find you by your nickname. An entry you share can be seen only by you and the friends you tagged in it. Your notification token is not visible to other users.</p>
+            <p>The App asks Apple for your name only, not for your email address.</p>
         </div>
 
         <div class="section">
             <h2>6. Who Processes Your Data</h2>
             <ul>
-                <li><strong>Apple</strong> — iCloud storage, App Store purchases, Sign in with Apple and delivery of notifications.</li>
+                <li><strong>Apple</strong> — iCloud storage, App Store purchases, Sign in with Apple, and delivery of notifications.</li>
                 <li><strong>Google Firebase (Google Cloud)</strong>, in the United States — our server and its database, and delivery of notifications.</li>
-                <li><strong>Anthropic, PBC</strong> — the Claude AI model that writes the review.</li>
+                <li><strong>Anthropic, PBC</strong> — provides Claude, the AI model used to write the review.</li>
             </ul>
             <p>These providers process data on our behalf and under their own terms. Your data may be processed in countries other than your own, including the United States.</p>
         </div>
@@ -193,16 +260,16 @@
         <div class="section">
             <h2>7. How Long We Keep It</h2>
             <ul>
-                <li>When you turn the review off in the App's Settings, your entries, reviews, notes and feedback are deleted from our server.</li>
-                <li>If your subscription ends, the server stops writing reviews. Your data is kept for 30 days in case you come back, and is then deleted.</li>
-                <li>When you delete your Friends account in the App, your profile, shared entries and list of friends are deleted.</li>
-                <li>Entries on your device and in your iCloud stay there until you delete them or the App.</li>
+                <li>When you turn the review off in the App's settings, the data kept for the review is deleted from our server: the copies of your entries, your reviews, the AI's notes, and your feedback. Entries you shared with friends are not affected.</li>
+                <li>If your subscription ends, the server stops writing reviews. The review data is kept for 30 days in case you come back and is then deleted. To have it deleted sooner, turn the review off in the App's settings or write to us.</li>
+                <li>When you delete your Friends account in the App, your profile, the entries you shared, and your list of friends are deleted. Signing out alone does not delete them.</li>
+                <li>Entries on your device stay there until you delete them or the App. Copies in your iCloud stay until you delete the entries in the App while iCloud sync is on, or remove the App's data in your iCloud settings.</li>
             </ul>
         </div>
 
         <div class="section">
             <h2>8. Your Choices</h2>
-            <p>You can use the App without the review and without Friends; then nothing from your journal leaves your device and your iCloud. You can turn either feature off at any time. To ask what we hold about you, to correct it or to have it deleted, write to the address in section 11.</p>
+            <p>You can use the App without the review and without Friends; then nothing from your diary leaves your device and your iCloud. You can turn the review off or delete your Friends account at any time. To find out what data we hold about you, or to ask us to correct or delete it, write to the address in section 11.</p>
         </div>
 
         <div class="section">
@@ -219,6 +286,7 @@
             <h2>11. Contact</h2>
             <p>If you have any questions about this policy, please contact us at <a class="contact-link" href="mailto:danilvilnicov@gmail.com">danilvilnicov@gmail.com</a>.</p>
         </div>
+        <div class="page-links"><a class="contact-link" href="about.html">About</a><a class="contact-link" href="terms-of-use.html">Terms of Use</a></div>
 
         <div class="footer">
             &copy; 2026 Blob. All rights reserved.

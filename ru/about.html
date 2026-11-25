@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О приложении — Blob</title>
+    <style>
+        :root {
+            --bg: #F2F2F2;
+            --card-bg: #FFFFFF;
+            --text-primary: #151515;
+            --text-secondary: #6A6A6A;
+            --text-tertiary: #999999;
+            --accent: #20C100;
+            --accent-soft: #68BE12;
+            --lime-primary: #7FF20D;
+            --lime-soft: #A9E100;
+            --divider: #E7E7E7;
+            --border: #D2D2D2;
+            --link: #397100;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1A1A1A;
+                --card-bg: #353535;
+                --text-primary: #F0F0F0;
+                --text-secondary: #F0F0F0;
+                --text-tertiary: #858585;
+                --accent: #20C100;
+                --accent-soft: #68BE12;
+                --lime-primary: #7FF20D;
+                --lime-soft: #A9E100;
+                --divider: #535353;
+                --border: #535353;
+                --link: #68BE12;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 48px 20px 64px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-icon {
+            width: 88px;
+            height: 88px;
+            border-radius: 22px;
+            margin: 0 auto 16px;
+            box-shadow: 0 8px 32px rgba(32, 193, 0, 0.25);
+        }
+
+        .hero-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 22px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .hero .tagline {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .section p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px 16px;
+            text-align: center;
+        }
+
+        .feature-card .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .feature-card .title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .feature-card .desc {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            line-height: 1.4;
+        }
+
+        .contact-link {
+            color: var(--link);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .contact-link:hover {
+            opacity: 0.8;
+        }
+
+        .made-with-love {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 14px;
+            color: var(--text-tertiary);
+        }
+
+        .version {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+
+
+        .lang-switch {
+            text-align: right;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .lang-switch a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .notice {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .page-links {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 32px;
+        }
+
+        .page-links a {
+            margin: 0 8px;
+        }
+    </style>
+    <link rel="alternate" hreflang="en" href="../about.html">
+</head>
+<body>
+    <div class="container">
+        <div class="lang-switch"><a href="../about.html?lang=en&amp;remember=1" lang="en" hreflang="en">English</a></div>
+        <div class="hero">
+            <div class="hero-icon">
+                <img src="../BlobAppIcon.png" alt="Значок приложения Blob">
+            </div>
+            <h1>Blob</h1>
+            <p class="tagline">Чувствовать. Отмечать. Понимать.</p>
+        </div>
+
+        <div class="section">
+            <h2>Что такое Blob?</h2>
+            <p>Blob — приложение для ведения дневника настроения. Его создал один независимый разработчик. Идея простая: мы каждый день что-то чувствуем, но редко находим минуту, чтобы в этом разобраться.</p>
+            <p>Записывайте, что чувствуете, добавляйте заметки и фото. Blob поможет увидеть закономерности, которые легко упустить. Каким бы ни был ваш день, Blob выслушает вас без осуждения.</p>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="icon">📝</div>
+                <div class="title">Дневник настроения</div>
+                <div class="desc">Настроение, пара слов, фото и место</div>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📊</div>
+                <div class="title">Статистика</div>
+                <div class="desc">Как меняется настроение со временем</div>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🤖</div>
+                <div class="title">Ежедневный разбор от ИИ</div>
+                <div class="desc">С Premium — короткий разбор дня каждое утро</div>
+            </div>
+            <div class="feature-card">
+                <div class="icon">👥</div>
+                <div class="title">Друзья</div>
+                <div class="desc">Делитесь записями с теми, кого выбрали</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Сделано с душой</h2>
+            <p>Один человек продумал и создал каждый экран, каждую анимацию, каждую деталь Blob. Без большой команды и корпоративного плана развития — просто из искреннего желания сделать что-то важное и полезное.</p>
+            <p>Blob соединяет простоту дневника с возможностями ИИ, чтобы вы могли лучше понимать своё эмоциональное состояние.</p>
+        </div>
+
+        <div class="section">
+            <h2>Мне важно беречь ваши данные</h2>
+            <p>Дневник хранится на вашем устройстве и, если вы пользуетесь iCloud, в вашем личном хранилище iCloud. Я не продаю ваши данные и никогда не буду.</p>
+            <p>Ежедневный разбор от ИИ выключен по умолчанию. Чтобы получать его, включите функцию в Blob и подтвердите отправку записей. Пока разбор включён, приложение отправляет записи на сервер Blob (Google Firebase, США): текст, настроение, дату и время, название места, имена отмеченных людей и число фото — но не сами фото. Сервер передаёт записи компании Anthropic, модель Claude которой готовит разбор. Записи передаются без изменений, вместе с личными сведениями, которые вы в них указали. Для разбора сервер узнаёт вас по случайному ключу, созданному на вашем устройстве. Если выключить разбор в настройках Blob, с сервера будут удалены данные этой функции: записи, разборы, заметки ИИ и ваши отклики.</p>
+            <p>Если вы входите в аккаунт, чтобы пользоваться «Друзьями», ваш профиль и записи, которыми вы делитесь, хранятся в Google Firebase. Запись, которой вы поделились, видят только отмеченные в ней друзья; ваш профиль можно найти по никнейму.</p>
+            <p>Подробности — в <a class="contact-link" href="privacy-policy.html">Политике конфиденциальности</a>.</p>
+        </div>
+
+        <div class="section">
+            <h2>Связаться</h2>
+            <p>Есть вопрос, предложение о новой функции или просто хочется поздороваться? Напишите мне: каждое сообщение для меня важно.</p>
+            <p>Почта: <a class="contact-link" href="mailto:danilvilnicov@gmail.com">danilvilnicov@gmail.com</a></p>
+        </div>
+
+        <div class="made-with-love">
+            Сделано с ❤️
+        </div>
+        <div class="version">
+            Версия 1.0
+        </div>
+        <div class="page-links"><a class="contact-link" href="privacy-policy.html">Политика конфиденциальности</a><a class="contact-link" href="terms-of-use.html">Условия использования</a></div>
+    </div>
+</body>
+</html>

@@ -17,6 +17,7 @@
             --lime-soft: #A9E100;
             --divider: #E7E7E7;
             --border: #D2D2D2;
+            --link: #397100;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -32,6 +33,7 @@
                 --lime-soft: #A9E100;
                 --divider: #535353;
                 --border: #535353;
+                --link: #68BE12;
             }
         }
 
@@ -145,7 +147,7 @@
         }
 
         .contact-link {
-            color: var(--accent-soft);
+            color: var(--link);
             text-decoration: none;
             transition: opacity 0.2s;
         }
@@ -167,10 +169,72 @@
             font-size: 13px;
             color: var(--text-tertiary);
         }
+
+
+        .lang-switch {
+            text-align: right;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .lang-switch a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .notice {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .page-links {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 32px;
+        }
+
+        .page-links a {
+            margin: 0 8px;
+        }
     </style>
+    <link rel="alternate" hreflang="ru" href="ru/about.html">
+    <script>
+        // Читателю с русским языком устройства открывается русская страница.
+        // Выбор «English» в переключателе запоминается; ссылка на оригинал из перевода — только на один просмотр.
+        (function () {
+            var params = new URLSearchParams(location.search);
+            var saved = null;
+            try { saved = localStorage.getItem("blobLang"); } catch (error) {}
+            if (params.get("lang") === "en") {
+                if (params.get("remember") === "1") {
+                    try { localStorage.setItem("blobLang", "en"); } catch (error) {}
+                }
+                // Соседние английские страницы открываются тоже по-английски.
+                document.addEventListener("DOMContentLoaded", function () {
+                    document.querySelectorAll('a[href$=".html"]').forEach(function (link) {
+                        if (link.getAttribute("href").indexOf("/") === -1) { link.setAttribute("href", link.getAttribute("href") + "?lang=en"); }
+                    });
+                });
+                return;
+            }
+            var device = (navigator.language || "").toLowerCase().split("-")[0];
+            var wantsRussian = saved ? saved === "ru" : device === "ru";
+            if (!wantsRussian) { return; }
+            var target = new URL("ru/about.html", location.href);
+            params.delete("lang");
+            params.delete("remember");
+            target.search = params.toString();
+            target.hash = location.hash;
+            location.replace(target.href);
+        })();
+    </script>
 </head>
 <body>
     <div class="container">
+        <div class="lang-switch"><a href="ru/about.html" lang="ru" hreflang="ru" onclick="try { localStorage.setItem('blobLang', 'ru'); } catch (error) {}">Русский</a></div>
         <div class="hero">
             <div class="hero-icon">
                 <img src="BlobAppIcon.png" alt="Blob App Icon">
@@ -181,15 +245,15 @@
 
         <div class="section">
             <h2>What is Blob?</h2>
-            <p>Blob is a mood journaling app built by a solo indie developer. It was born from a simple idea: we all experience emotions every day, but rarely take a moment to understand them.</p>
-            <p>Capture how you feel, add notes and photos, and let Blob reveal patterns you might have missed. Whether it's a great day or a tough one — Blob is here to listen, without judgment.</p>
+            <p>Blob is a mood diary app built by a solo indie developer. It was born from a simple idea: we all experience emotions every day, but rarely take a moment to understand them.</p>
+            <p>Capture how you feel, add notes and photos, and let Blob reveal patterns you might have missed. Whether it's a great day or a tough one, Blob is here to listen without judgment.</p>
         </div>
 
         <div class="features">
             <div class="feature-card">
                 <div class="icon">📝</div>
-                <div class="title">Mood Journal</div>
-                <div class="desc">Log emotions with text, photos &amp; location</div>
+                <div class="title">Mood Diary</div>
+                <div class="desc">A mood, a few words, photos, and a place</div>
             </div>
             <div class="feature-card">
                 <div class="icon">📊</div>
@@ -198,27 +262,27 @@
             </div>
             <div class="feature-card">
                 <div class="icon">🤖</div>
-                <div class="title">AI Insights</div>
-                <div class="desc">Get personalized analytics on your emotions</div>
+                <div class="title">Daily AI Review</div>
+                <div class="desc">With Premium, a short review of your day each morning</div>
             </div>
             <div class="feature-card">
                 <div class="icon">👥</div>
                 <div class="title">Friends</div>
-                <div class="desc">Share moments and stay connected</div>
+                <div class="desc">Share entries with the people you choose</div>
             </div>
         </div>
 
         <div class="section">
             <h2>Crafted with Passion</h2>
             <p>Every screen, every animation, every detail in Blob has been carefully designed and developed by one person. No big team, no corporate roadmap — just a genuine desire to create something meaningful and helpful.</p>
-            <p>Blob combines the simplicity of a journal with the power of AI to give you a deeper perspective on your emotional well-being.</p>
+            <p>Blob combines the simplicity of a diary with the power of AI to give you a deeper perspective on your emotional well-being.</p>
         </div>
 
         <div class="section">
             <h2>Your Privacy Matters</h2>
-            <p>Your journal lives on your device and, if you use iCloud, in your private iCloud storage. I don't sell your data and never will.</p>
-            <p>The daily AI review is optional and stays off until you turn it on. While it is on, your entries are sent to Blob's server (Google Firebase, United States) and to Anthropic's Claude, which writes the review: the text, mood, time, place name, the names of people you tagged and the number of photos — never the photos themselves. The text is sent exactly as you wrote it, so anything personal in an entry is included. The server knows you only by a random key created on your device, not by your name, email or Apple ID. Turn the review off in Settings and your entries, reviews and feedback are deleted from the server.</p>
-            <p>If you sign in to use Friends, your profile and the entries you share with friends are stored on Google Firebase so that they can see them.</p>
+            <p>Your diary lives on your device and, if you use iCloud, in your private iCloud storage. I don't sell your data and never will.</p>
+            <p>The daily AI review is off by default. To get it, you turn it on in Blob and confirm that your entries may be sent. While it is on, the app sends your entries to Blob's server (Google Firebase, United States): the text, mood, date and time, place name, the names of people you tagged, and the number of photos — never the photos themselves. The server passes the entries to Anthropic, whose Claude model writes the review. Entries are sent as written, including any personal details you include. For the review, the server identifies you by a random key created on your device. If you turn the review off in Blob's settings, the data kept for this feature is deleted from the server: your entries, reviews, the AI's notes, and your feedback.</p>
+            <p>If you sign in to use Friends, your profile and the entries you share are stored on Google Firebase. A shared entry can be seen only by the friends you tagged in it; your profile can be found by your nickname.</p>
             <p>The details are in the <a class="contact-link" href="privacy-policy.html">Privacy Policy</a>.</p>
         </div>
 
@@ -234,6 +298,7 @@
         <div class="version">
             Version 1.0
         </div>
+        <div class="page-links"><a class="contact-link" href="privacy-policy.html">Privacy Policy</a><a class="contact-link" href="terms-of-use.html">Terms of Use</a></div>
     </div>
 </body>
 </html>
